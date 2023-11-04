@@ -15,6 +15,16 @@ import Review.Rule exposing (Rule)
 import Upgrade
 
 
+ignoredDirs : List String
+ignoredDirs =
+    [ "tests/", "vendor/", "src/Evergreen/", ".elm-spa/" ]
+
+ignoredFiles : List String
+ignoredFiles =
+    [ "src/Config.elm", "src/Env.elm" ]
+
 config : List Rule
 config =
-    [ Upgrade.rule |> Review.Rule.ignoreErrorsForDirectories [ "src/Evergreen" ] ]
+    [ Upgrade.rule |> Review.Rule.ignoreErrorsForDirectories ignoredDirs
+    , Upgrade.rule |> Review.Rule.ignoreErrorsForFiles ignoredFiles
+    ]
