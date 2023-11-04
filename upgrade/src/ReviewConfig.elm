@@ -25,10 +25,6 @@ ignoredFiles =
 
 config : List Rule
 config =
-    -- Note: Don't apply elm-review to vendored code, tests, elm-spa generated code, Evergreen, and a few special
-    --       Lamdera-related Elm files
-    config_
-        |> List.map (\rule -> rule
-        |> Rule.ignoreErrorsForDirectories ignoredDirs
-        |> Rule.ignoreErrorsForFiles ignoredFiles
-        )
+    [ Upgrade.rule |> Review.Rule.ignoreErrorsForDirectories ignoredDirs
+    , Upgrade.rule |> Review.Rule.ignoreErrorsForFiles ignoredFiles
+    ]
